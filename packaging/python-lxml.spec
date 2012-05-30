@@ -15,6 +15,7 @@ Group:          Development/Libraries
 License:        BSD
 URL:            http://codespeak.net/lxml/
 Source0:        http://cheeseshop.python.org/packages/source/l/lxml/lxml-%{version}.tar.gz
+Source1001: packaging/python-lxml.manifest 
 #Source0:        http://codespeak.net/lxml/lxml-%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -62,6 +63,7 @@ chmod a-x %{py3dir}/doc/rest2html.py
 %endif
 
 %build
+cp %{SOURCE1001} .
 CFLAGS="%{optflags}" %{__python} -c 'import setuptools; execfile("setup.py")' build
 
 %if %{with_python3}
@@ -84,12 +86,14 @@ popd
 rm -rf %{buildroot}
 
 %files
+%manifest python-lxml.manifest
 %defattr(-,root,root,-)
 %doc README.txt LICENSES.txt PKG-INFO CREDITS.txt CHANGES.txt doc/
 %{python_sitearch}/*
 
 %if %{with_python3}
 %files -n python3-lxml
+%manifest python-lxml.manifest
 %defattr(-,root,root,-)
 %doc README.txt LICENSES.txt PKG-INFO CREDITS.txt CHANGES.txt doc/
 %{python3_sitearch}/*
