@@ -94,3 +94,4 @@ rm -rf %{buildroot}
 %doc README.txt LICENSES.txt PKG-INFO CREDITS.txt CHANGES.txt doc/
 %{python3_sitearch}/*
 %endif
+
